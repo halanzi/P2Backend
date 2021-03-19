@@ -2,7 +2,7 @@
 
 ## by pair 2: Humood Alanzi and Salem Alhajri
 
-Current project progress: added routes, database, and controllers
+Current project progress: added models and one basic relation
 
 ### Expositions
 
