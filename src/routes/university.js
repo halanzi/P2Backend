@@ -23,16 +23,16 @@ router.param("universityId", async (req, res, next, universityId) => {
   }
 });
 
-// Product list
+// University list
 router.get("/", universityList);
 
-// Adding Products
+// Adding University
 router.post("/", universityCreate);
 
-// Deleting Products
+// Deleting University
 router.delete("/:universityId", universityDelete);
 
-// Updating Products
+// Updating University
 router.put("/:universityId", universityUpdate);
 
 module.exports = router;

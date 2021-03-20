@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "homoudnahis",
-    "password": null,
-    "database": "P2Backend_db",
+    "username": "postgres",
+    "password": "167943",
+    "database": "p2backend_db",
     "host": "127.0.0.1",
     "dialect": "postgres",
     "logging": false

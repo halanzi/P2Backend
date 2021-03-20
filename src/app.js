@@ -6,6 +6,7 @@ const app = express();
 
 // Importing routes
 const universityroutes = require("./routes/university");
+const courseroutes = require("./routes/course");
 
 // Importing database
 const db = require("./db/models");
@@ -13,7 +14,10 @@ const db = require("./db/models");
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use("/universities", universityroutes); // Note: Make sure to place this line below all other app.use() methods.
+
+// Using routes
+app.use("/university", universityroutes); // Note: Make sure to place this line below all other app.use() methods.
+app.use("/course", courseroutes);
 
 // Handling Errors
 app.use((err, req, res, next) => {

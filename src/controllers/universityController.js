@@ -1,5 +1,6 @@
 // Databse
 const { University } = require("../db/models");
+const { Course } = require("../db/models");
 
 // Fetch university
 exports.fetchUniversity = async (universityId, next) => {
@@ -16,6 +17,11 @@ exports.universityList = async (req, res) => {
   try {
     const universities = await University.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
+      include: {
+        model: Course,
+        as: "course",
+        attributes: { exclude: ["createdAt", "updatedAt", "courseId"] },
+      },
     });
     res.json(universities);
   } catch (err) {

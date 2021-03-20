@@ -44,12 +44,11 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 // Relations
+//one-many
 db.University.hasMany(db.Course, {
   as: "courses",
-  foreignKey: {
-    name: "courseId",
-    allowNull: false,
-  },
+  foreignKey: "courseId",
+  allowNull: false,
 });
 
 db.Course.belongsTo(db.University, {
