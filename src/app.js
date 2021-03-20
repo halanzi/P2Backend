@@ -4,12 +4,16 @@ const cors = require("cors");
 // Initialize app
 const app = express();
 
+// Importing routes
+const universityroutes = require("./routes/university");
+
 // Importing database
 const db = require("./db/models");
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use("/universities", universityroutes); // Note: Make sure to place this line below all other app.use() methods.
 
 // Handling Errors
 app.use((err, req, res, next) => {

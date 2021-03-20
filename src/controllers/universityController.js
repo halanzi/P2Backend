@@ -1,6 +1,3 @@
-// Slug
-const slugify = require("slugify");
-
 // Databse
 const { University } = require("../db/models");
 
