@@ -3,7 +3,6 @@ const router = express.Router();
 
 // controllers
 const {
-  courseCreate,
   courseList,
   courseUpdate,
   courseDelete,
@@ -25,9 +24,6 @@ router.param("courseId", async (req, res, next, courseId) => {
 
 // course list
 router.get("/", courseList);
-
-// Adding course
-router.post("/", courseCreate);
 
 // Deleting course
 router.delete("/:courseId", courseDelete);

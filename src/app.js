@@ -7,6 +7,7 @@ const app = express();
 // Importing routes
 const universityroutes = require("./routes/university");
 const courseroutes = require("./routes/course");
+const studentroutes = require("./routes/student");
 
 // Importing database
 const db = require("./db/models");
@@ -18,6 +19,7 @@ app.use(express.json());
 // Using routes
 app.use("/university", universityroutes); // Note: Make sure to place this line below all other app.use() methods.
 app.use("/course", courseroutes);
+app.use("/student", studentroutes);
 
 // Handling Errors
 app.use((err, req, res, next) => {

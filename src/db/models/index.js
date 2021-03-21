@@ -44,16 +44,30 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 // Relations
-//one-many
+
+//******* one-many (2) *******
 db.University.hasMany(db.Course, {
   as: "courses",
-  foreignKey: "courseId",
+  foreignKey: "universityId",
   allowNull: false,
 });
 
 db.Course.belongsTo(db.University, {
   as: "university",
-  foreignKey: "courseId",
+  foreignKey: "universityId",
 });
+
+db.University.hasMany(db.Student, {
+  as: "students",
+  foreignKey: "universityId",
+  allowNull: false,
+});
+
+db.Student.belongsTo(db.University, {
+  as: "university",
+  foreignKey: "universityId",
+});
+
+// ******* many-many *******
 
 module.exports = db;

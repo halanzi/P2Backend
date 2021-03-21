@@ -1,6 +1,7 @@
 // Databse
 const { University } = require("../db/models");
 const { Course } = require("../db/models");
+const { Student } = require("../db/models");
 
 // Fetch university
 exports.fetchUniversity = async (universityId, next) => {
@@ -20,7 +21,10 @@ exports.universityList = async (req, res) => {
       include: {
         model: Course,
         as: "course",
-        attributes: { exclude: ["createdAt", "updatedAt", "courseId"] },
+        attributes: ["id"],
+        model: Student,
+        as: "student",
+        attributes: ["id"],
       },
     });
     res.json(universities);
@@ -38,6 +42,32 @@ exports.universityCreate = async (req, res, next) => {
     next(err);
   }
 };
+
+// ******* heiarchy division *******
+
+// Create course
+exports.courseCreate = async (req, res, next) => {
+  try {
+    req.body.universityId = req.university.id;
+    const newCourse = await Course.create(req.body);
+    res.status(201).json(newCourse);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// Create student
+exports.studentCreate = async (req, res, next) => {
+  try {
+    req.body.universityId = req.university.id;
+    const newStudent = await Student.create(req.body);
+    res.status(201).json(newStudent);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// ******* heirachy end *******
 
 // Update university
 exports.universityUpdate = async (req, res, next) => {

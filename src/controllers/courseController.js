@@ -16,24 +16,14 @@ exports.fetchCourse = async (courseId, next) => {
 exports.courseList = async (req, res) => {
   try {
     const courses = await Course.findAll({
-      attributes: { exclude: ["createdAt", "updatedAt", "courseId"] },
+      attributes: { exclude: ["createdAt", "updatedAt"] },
       include: {
         model: University,
         as: "university",
-        attributes: { exclude: ["createdAt", "updatedAt"] },
+        attributes: ["id"],
       },
     });
     res.json(courses);
-  } catch (err) {
-    next(err);
-  }
-};
-
-// Create course
-exports.courseCreate = async (req, res, next) => {
-  try {
-    const newCourse = await Course.create(req.body);
-    res.status(201).json(newCourse);
   } catch (err) {
     next(err);
   }

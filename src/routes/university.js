@@ -8,6 +8,8 @@ const {
   universityUpdate,
   universityDelete,
   fetchUniversity,
+  courseCreate,
+  studentCreate,
 } = require("../controllers/universityController");
 
 // Param Middleware
@@ -26,8 +28,10 @@ router.param("universityId", async (req, res, next, universityId) => {
 // University list
 router.get("/", universityList);
 
-// Adding University
+// Adding University & (courses + students) to Uni
 router.post("/", universityCreate);
+router.post("/:universityId/course", courseCreate);
+router.post("/:universityId/student", studentCreate);
 
 // Deleting University
 router.delete("/:universityId", universityDelete);

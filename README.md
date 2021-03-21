@@ -2,7 +2,7 @@
 
 ## by pair 2: Humood Alanzi and Salem Alhajri
 
-Current project progress: added models and one basic relation
+Current project progress: finished one relation completetly
 
 ### Expositions
 
