@@ -44,7 +44,6 @@ exports.universityCreate = async (req, res, next) => {
 // ******* heiarchy division *******
 
 // Create course
-//newCourse.addUniversity(req.body.universitiyId)
 exports.courseCreate = async (req, res, next) => {
   try {
     req.body.universityId = req.university.id;

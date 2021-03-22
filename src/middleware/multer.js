@@ -3,11 +3,11 @@ const multer = require("multer");
 const slugify = require("slugify");
 
 const storage = multer.diskStorage({
-  destination: "./media",
+  destination: "./src/media",
   filename: (request, file, nameFile) => {
     nameFile(
       null,
-      `${slugify(request.body.name.toLowerCase() + Date.now())}.${
+      `${slugify(request.body.firstName.toLowerCase() + Date.now())}.${
         file.originalname.split(".")[1]
       }`
     );

@@ -58,6 +58,7 @@ exports.addStudentToCourse = async (req, res, next) => {
       const student = await Student.findByPk(id);
       req.course.addStudent(student);
     });
+    res.status(204).end();
   } catch (err) {
     next(err);
   }

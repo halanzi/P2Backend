@@ -19,7 +19,7 @@ app.use(cors());
 app.use(express.json());
 
 // media
-app.use("/media", express.static(path.join(__dirname, "media")));
+app.use("/media", express.static(path.join(__dirname, "src/media")));
 
 // Using routes
 app.use("/university", universityroutes); // Note: Make sure to place this line below all other app.use() methods.

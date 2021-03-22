@@ -37,6 +37,6 @@ router.delete("/:studentId", studentDelete);
 router.put("/:studentId", upload.single("image"), studentUpdate);
 
 // Add course to student
-router.put("/:studentId/course/", addCourseToStudent);
+router.post("/:studentId/course/", addCourseToStudent);
 
 module.exports = router;
