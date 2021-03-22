@@ -69,5 +69,16 @@ db.Student.belongsTo(db.University, {
 });
 
 // ******* many-many *******
+db.Student.belongsToMany(db.Course, {
+  through: "Administration",
+  as: "courses",
+  foreignKey: "studentId",
+});
+
+db.Course.belongsToMany(db.Student, {
+  through: "Administration",
+  as: "students",
+  foreignKey: "courseId",
+});
 
 module.exports = db;

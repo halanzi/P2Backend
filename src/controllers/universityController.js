@@ -1,7 +1,5 @@
 // Databse
-const { University } = require("../db/models");
-const { Course } = require("../db/models");
-const { Student } = require("../db/models");
+const { University, Course, Student } = require("../db/models");
 
 // Fetch university
 exports.fetchUniversity = async (universityId, next) => {
@@ -18,14 +16,14 @@ exports.universityList = async (req, res) => {
   try {
     const universities = await University.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
-      include: {
-        model: Course,
-        as: "course",
-        attributes: ["id"],
-        model: Student,
-        as: "student",
-        attributes: ["id"],
-      },
+      include: [
+        {
+          model: Course,
+          as: "course",
+          attributes: ["id"],
+        },
+        { model: Student, as: "student", attributes: ["id"] },
+      ],
     });
     res.json(universities);
   } catch (err) {
@@ -46,6 +44,7 @@ exports.universityCreate = async (req, res, next) => {
 // ******* heiarchy division *******
 
 // Create course
+//newCourse.addUniversity(req.body.universitiyId)
 exports.courseCreate = async (req, res, next) => {
   try {
     req.body.universityId = req.university.id;
@@ -59,6 +58,9 @@ exports.courseCreate = async (req, res, next) => {
 // Create student
 exports.studentCreate = async (req, res, next) => {
   try {
+    if (req.file) {
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+    }
     req.body.universityId = req.university.id;
     const newStudent = await Student.create(req.body);
     res.status(201).json(newStudent);

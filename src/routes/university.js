@@ -1,5 +1,9 @@
+// Dependancies
 const express = require("express");
 const router = express.Router();
+
+// importing
+const upload = require("../middleware/multer");
 
 // controllers
 const {
@@ -31,7 +35,7 @@ router.get("/", universityList);
 // Adding University & (courses + students) to Uni
 router.post("/", universityCreate);
 router.post("/:universityId/course", courseCreate);
-router.post("/:universityId/student", studentCreate);
+router.post("/:universityId/student", upload.single("image"), studentCreate);
 
 // Deleting University
 router.delete("/:universityId", universityDelete);

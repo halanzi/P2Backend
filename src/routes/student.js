@@ -1,12 +1,17 @@
+// Dependancies
 const express = require("express");
 const router = express.Router();
 
-// controllers
+// Importing
+const upload = require("../middleware/multer");
+
+// Controllers
 const {
   studentList,
   studentUpdate,
   studentDelete,
   fetchStudent,
+  addCourseToStudent,
 } = require("../controllers/studentController");
 
 // Param Middleware
@@ -22,13 +27,16 @@ router.param("studentId", async (req, res, next, studentId) => {
   }
 });
 
-// student list
+// Student list
 router.get("/", studentList);
 
 // Deleting student
 router.delete("/:studentId", studentDelete);
 
 // Updating student
-router.put("/:studentId", studentUpdate);
+router.put("/:studentId", upload.single("image"), studentUpdate);
+
+// Add course to student
+router.put("/:studentId/course/", addCourseToStudent);
 
 module.exports = router;

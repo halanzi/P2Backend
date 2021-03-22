@@ -1,12 +1,14 @@
+// Dependancies
 const express = require("express");
 const router = express.Router();
 
-// controllers
+// Controllers
 const {
   courseList,
   courseUpdate,
   courseDelete,
   fetchCourse,
+  addStudentToCourse,
 } = require("../controllers/courseController");
 
 // Param Middleware
@@ -22,7 +24,7 @@ router.param("courseId", async (req, res, next, courseId) => {
   }
 });
 
-// course list
+// Course list
 router.get("/", courseList);
 
 // Deleting course
@@ -30,5 +32,8 @@ router.delete("/:courseId", courseDelete);
 
 // Updating course
 router.put("/:courseId", courseUpdate);
+
+// Add student to course
+router.put("/:courseId/student/", addStudentToCourse);
 
 module.exports = router;

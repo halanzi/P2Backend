@@ -1,7 +1,5 @@
 // Databse
-const { Course } = require("../db/models");
-const { University } = require("../db/models");
-const { Student } = require("../db/models");
+const { University, Course, Student } = require("../db/models");
 
 // Fetch students
 exports.fetchStudent = async (studentId, next) => {
@@ -18,11 +16,14 @@ exports.studentList = async (req, res) => {
   try {
     const students = await Student.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
-      include: {
-        model: University,
-        as: "university",
-        attributes: ["id"],
-      },
+      include: [
+        {
+          model: University,
+          as: "university",
+          attributes: ["id"],
+        },
+        { model: Course, as: "course", attributes: ["id"] },
+      ],
     });
     res.json(students);
   } catch (err) {
@@ -33,6 +34,9 @@ exports.studentList = async (req, res) => {
 // Update student
 exports.studentUpdate = async (req, res, next) => {
   try {
+    if (req.file) {
+      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+    }
     await req.student.update(req.body);
     res.status(204).end();
   } catch (err) {
@@ -45,6 +49,18 @@ exports.studentDelete = async (req, res, next) => {
   try {
     await req.student.destroy();
     res.status(204).end();
+  } catch (err) {
+    next(err);
+  }
+};
+
+// Add courses to student
+exports.addCourseToStudent = async (req, res, next) => {
+  try {
+    await req.body.courseIds.forEach(async (id) => {
+      const course = await Course.findByPk(id);
+      req.student.addCourse(course);
+    });
   } catch (err) {
     next(err);
   }

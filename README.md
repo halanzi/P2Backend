@@ -2,7 +2,7 @@
 
 ## by pair 2: Humood Alanzi and Salem Alhajri
 
-Current project progress: finished one relation completetly
+Current project progress: many-many relations and Multer (maybe?)
 
 ### Expositions
 
