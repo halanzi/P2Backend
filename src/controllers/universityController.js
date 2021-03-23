@@ -12,17 +12,17 @@ exports.fetchUniversity = async (universityId, next) => {
 };
 
 // University list
-exports.universityList = async (req, res) => {
+exports.universityList = async (req, res, next) => {
   try {
     const universities = await University.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
       include: [
         {
           model: Course,
-          as: "course",
+          as: "courses",
           attributes: ["id"],
         },
-        { model: Student, as: "student", attributes: ["id"] },
+        { model: Student, as: "students", attributes: ["id"] },
       ],
     });
     res.json(universities);
