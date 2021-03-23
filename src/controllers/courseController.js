@@ -12,7 +12,7 @@ exports.fetchCourse = async (courseId, next) => {
 };
 
 // Course list
-exports.courseList = async (req, res) => {
+exports.courseList = async (req, res, next) => {
   try {
     const courses = await Course.findAll({
       attributes: { exclude: ["createdAt", "updatedAt"] },
@@ -22,7 +22,7 @@ exports.courseList = async (req, res) => {
           as: "university",
           attributes: ["id"],
         },
-        { model: Student, as: "student", attributes: ["id"] },
+        { model: Student, as: "students", attributes: ["id"] },
       ],
     });
     res.json(courses);
